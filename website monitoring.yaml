@@ -1,0 +1,37 @@
+zabbix_export:
+  version: '6.0'
+  date: '2023-05-29T07:53:22Z'
+  groups:
+    -
+      uuid: 0f510ded80064d00a56e3102450b91d5
+      name: WebsiteHosts
+  templates:
+    -
+      uuid: 9d572bf9adbd4ce383a45e0231ff5d3d
+      template: 'Website Monitoring'
+      name: 'Website Monitoring'
+      groups:
+        -
+          name: WebsiteHosts
+      httptests:
+        -
+          uuid: 2c87a02e300f4017801a8432d54e771c
+          name: 'Website Health Check: {$WEB.URL}'
+          agent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
+          steps:
+            -
+              name: 'Website Availability'
+              url: '{$WEB.URL}'
+              timeout: 300s
+              status_codes: '200'
+      macros:
+        -
+          macro: '{$WEB.URL}'
+  triggers:
+    -
+      uuid: b4514b63050a4b38954bab3fd80476aa
+      expression: 'last(/Website Monitoring/web.test.rspcode[Website Health Check: {$WEB.URL},Website Availability])<>200'
+      recovery_mode: RECOVERY_EXPRESSION
+      recovery_expression: 'last(/Website Monitoring/web.test.rspcode[Website Health Check: {$WEB.URL},Website Availability])=200'
+      name: 'Website not available: "{$WEB.URL}"'
+      priority: HIGH

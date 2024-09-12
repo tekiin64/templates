@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.0</version>
+    <date>2023-03-21T09:48:12Z</date>
+    <groups>
+        <group>
+            <uuid>a571c0d144b14fd4a87a9d9b2aa9fcd6</uuid>
+            <name>Templates/Applications</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <uuid>7b67b862f2b14152afffddcdcb9f2320</uuid>
+            <template>Website certificate by Zabbix agent 2 - PROD</template>
+            <name>Website certificate by Zabbix agent 2 - PROD</name>
+            <description>The template to monitor TLS/SSL certificate on the website by Zabbix agent 2 that works without any external scripts.
+Zabbix agent 2 with the WebCertificate plugin requests certificate using the web.certificate.get key and returns JSON with certificate attributes.
+
+You can discuss this template or leave feedback on our forum https://www.zabbix.com/forum/zabbix-suggestions-and-feedback/428309-discussion-thread-for-official-zabbix-template-tls-ssl-certificates-monitoring
+
+Template tooling version used: 0.41</description>
+            <groups>
+                <group>
+                    <name>Templates/Applications</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>c02dcb35624c42beb47a07fe315dab9e</uuid>
+                    <name>Cert: Subject alternative name</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.alternative_names</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The subject alternative name extension allows identities to be bound to the subject of the certificate.  These identities may be included in addition to or in place of the identity in the subject field of the certificate.  Defined options include an Internet electronic mail address, a DNS name, an IP address, and a Uniform Resource Identifier (URI).</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.alternative_names</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>21564f6d34ab40d1bd8724737641b763</uuid>
+                    <name>Cert: Issuer</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.issuer</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The field identifies the entity that has signed and issued the certificate.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.issuer</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fe37cd9a0cf84fa9a75a2d2cf7f96e01</uuid>
+                    <name>Cert: Last validation status</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.message</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Last check result message.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.result.message</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d060a36ee0bd4c0fadd20ba5eb63fbd1</uuid>
+                    <name>Cert: Expires on</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.not_after</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <units>unixtime</units>
+                    <description>The date on which the certificate validity period ends.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.not_after.timestamp</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>b3680e05031b4d5b9b08a1a7db5ace7e</uuid>
+                            <expression>(last(/Website certificate by Zabbix agent 2 - PROD/cert.not_after) - now()) / 86400 &lt; 0</expression>
+                            <name>Cert: SSL certificate expired (Last valid date: {ITEM.LASTVALUE} )</name>
+                            <priority>DISASTER</priority>
+                            <description>The SSL certificate should be updated or it will become untrusted.</description>
+                            <manual_close>YES</manual_close>
+                            <tags>
+                                <tag>
+                                    <tag>scope</tag>
+                                    <value>notice</value>
+                                </tag>
+                            </tags>
+                        </trigger>
+                        <trigger>
+                            <uuid>93e0fcf31e024e3c9c96e63bb1dd3d1e</uuid>
+                            <expression>(last(/Website certificate by Zabbix agent 2 - PROD/cert.not_after) - now()) / 86400 &lt; {$CERT.EXPIRY.WARN}</expression>
+                            <name>Cert: SSL certificate expires soon (less than {$CERT.EXPIRY.WARN} days)</name>
+                            <priority>WARNING</priority>
+                            <description>The SSL certificate should be updated or it will become untrusted.</description>
+                            <manual_close>YES</manual_close>
+                            <tags>
+                                <tag>
+                                    <tag>scope</tag>
+                                    <value>notice</value>
+                                </tag>
+                            </tags>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>4e0aeadad8ae4dc18011d5787a8aa3e9</uuid>
+                    <name>Cert: Valid from</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.not_before</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <units>unixtime</units>
+                    <description>The date on which the certificate validity period begins.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.not_before.timestamp</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fb46e12809c6482c85728a1dc6195a5e</uuid>
+                    <name>Cert: Public key algorithm</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.public_key_algorithm</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>The digital signature algorithm is used to verify the signature of a certificate.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.public_key_algorithm</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>3d3ac6e654d14ea2bcb587b16dc97b94</uuid>
+                    <name>Cert: Serial number</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.serial_number</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>The serial number is a positive integer assigned by the CA to each certificate. It is unique for each certificate issued by a given CA. Non-conforming CAs may issue certificates with serial numbers that are negative or zero.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.serial_number</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>01a67ea5ea1d4c3e92e60566e99ed5c0</uuid>
+                    <name>Cert: Fingerprint</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.sha1_fingerprint</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>The Certificate Signature (SHA1 Fingerprint or Thumbprint) is the hash of the entire certificate in DER form.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.sha1_fingerprint</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>92f8d17757bc49c092eea71ff1a22b4d</uuid>
+                            <expression>last(/Website certificate by Zabbix agent 2 - PROD/cert.sha1_fingerprint) &lt;&gt; last(/Website certificate by Zabbix agent 2 - PROD/cert.sha1_fingerprint,#2)</expression>
+                            <name>Cert: Fingerprint has changed (new version: {ITEM.VALUE})</name>
+                            <priority>INFO</priority>
+                            <description>The SSL certificate fingerprint has changed. If you did not update the certificate, it may mean your certificate has been hacked. Ack to close.
+There could be multiple valid certificates on some installations. In this case, the trigger will have a false positive. You can ignore it or disable the trigger.</description>
+                            <manual_close>YES</manual_close>
+                            <tags>
+                                <tag>
+                                    <tag>scope</tag>
+                                    <value>notice</value>
+                                </tag>
+                            </tags>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>1edeeceed3d9451f9b6a5e07f823703d</uuid>
+                    <name>Cert: Signature algorithm</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.signature_algorithm</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>The algorithm identifier for the algorithm used by the CA to sign the certificate.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.signature_algorithm</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>ba0b5cca37934acabac967c00ceabd07</uuid>
+                    <name>Cert: Subject</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.subject</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>The field identifies the entity associated with the public key stored in the subject public key field.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.subject</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>058fc826aa514b8e8b2534ccbd2846b6</uuid>
+                    <name>Cert: Validation result</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.validation</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>The certificate validation result. Possible values: valid/invalid/valid-but-self-signed</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.result.value</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>3ca47002401140a4a1a41342b2e81ca7</uuid>
+                            <expression>find(/Website certificate by Zabbix agent 2 - PROD/cert.validation,,&quot;like&quot;,&quot;invalid&quot;)=1</expression>
+                            <name>Cert: SSL certificate is invalid</name>
+                            <priority>HIGH</priority>
+                            <description>SSL certificate has expired or it is issued for another domain.</description>
+                            <tags>
+                                <tag>
+                                    <tag>scope</tag>
+                                    <value>security</value>
+                                </tag>
+                            </tags>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>9246003c724c4e0eb1837bd2a337e7aa</uuid>
+                    <name>Cert: Version</name>
+                    <type>DEPENDENT</type>
+                    <key>cert.version</key>
+                    <delay>0</delay>
+                    <history>7d</history>
+                    <trends>0</trends>
+                    <value_type>CHAR</value_type>
+                    <description>The version of the encoded certificate.</description>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <parameters>
+                                <parameter>$.x509.version</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <master_item>
+                        <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    </master_item>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>cert</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>a5bc3c791b6649409075fcc3ee62040d</uuid>
+                    <name>Cert: Get</name>
+                    <key>web.certificate.get[{HOST.NAME},{$CERT.WEBSITE.PORT},{$CERT.WEBSITE.IP}]</key>
+                    <delay>15m</delay>
+                    <history>0</history>
+                    <trends>0</trends>
+                    <value_type>TEXT</value_type>
+                    <description>Returns the JSON with attributes of a certificate of the requested site.</description>
+                    <preprocessing>
+                        <step>
+                            <type>DISCARD_UNCHANGED_HEARTBEAT</type>
+                            <parameters>
+                                <parameter>6h</parameter>
+                            </parameters>
+                        </step>
+                    </preprocessing>
+                    <tags>
+                        <tag>
+                            <tag>component</tag>
+                            <value>raw</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+            <tags>
+                <tag>
+                    <tag>class</tag>
+                    <value>software</value>
+                </tag>
+                <tag>
+                    <tag>target</tag>
+                    <value>certificate</value>
+                </tag>
+            </tags>
+            <macros>
+                <macro>
+                    <macro>{$CERT.EXPIRY.WARN}</macro>
+                    <value>30</value>
+                    <description>Number of days until the certificate expires.</description>
+                </macro>
+                <macro>
+                    <macro>{$CERT.WEBSITE.IP}</macro>
+                    <description>The website IP address for the connection.</description>
+                </macro>
+                <macro>
+                    <macro>{$CERT.WEBSITE.PORT}</macro>
+                    <value>443</value>
+                    <description>The TLS/SSL port number of the website.</description>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+</zabbix_export>

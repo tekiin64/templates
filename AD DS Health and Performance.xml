@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.0</version>
+    <date>2023-03-21T09:47:56Z</date>
+    <groups>
+        <group>
+            <uuid>b9390195ecad4986968746a2a9b56354</uuid>
+            <name>My Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <uuid>01548d1b601f4732b8b26c229305e5bf</uuid>
+            <template>AD DS Health and Performance</template>
+            <name>AD DS Health and Performance</name>
+            <description>## Overview
+
+Performance counters
+
+
+* DRA Inbound Bytes Total/Sec
+* DRA Inbound Object Updates Remaining in Packet
+* DRA Outbound Bytes Total/Sec
+* DRA Pending Replication Synchronizations
+* Kerberos Authentications/Sec
+* LDAP Bind Time
+* LDAP Client Sessions
+* LDAP Searches/Sec
+* LDAP Successful Binds/Sec
+* LDAP Active Threads
+* LDAP Writes/Sec
+* NTLM Authentications
+
+
+Events
+
+
+* Active Directory Web Service (Error, Warning)
+* DFS Replication (Error, Warning)
+* Directory Service (Error, Warning)
+* DNS Server (Error, Warning)
+
+
+ Service
+
+
+* Distributed File System Enables
+* DNS Server
+* DFS Replication
+* </description>
+            <groups>
+                <group>
+                    <name>My Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>510bed9780f54dbc94521c1afbd668b0</uuid>
+                    <name>Active Directory Web Services Events</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>eventlog[Active Directory Web Services,,&quot;Warning|Error&quot;]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <value_type>LOG</value_type>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Events</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>09121ac7fa8a4b64b8b6f45acdd64b4d</uuid>
+                            <expression>logseverity(/AD DS Health and Performance/eventlog[Active Directory Web Services,,&quot;Warning|Error&quot;])&gt;1 and nodata(/AD DS Health and Performance/eventlog[Active Directory Web Services,,&quot;Warning|Error&quot;],1800s)=0</expression>
+                            <name>Active Directory Web Services Error on {HOST.NAME}</name>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>6e038f783e4b44dc81038d0e3c3c7baf</uuid>
+                    <name>DFS Replication Events</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>eventlog[DFS Replication,,&quot;Warning|Error&quot;]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <value_type>LOG</value_type>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Events</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>bf64470533d0470895cdebd814a37dc2</uuid>
+                            <expression>logseverity(/AD DS Health and Performance/eventlog[DFS Replication,,&quot;Warning|Error&quot;])&gt;1 and nodata(/AD DS Health and Performance/eventlog[DFS Replication,,&quot;Warning|Error&quot;],1800s)=0</expression>
+                            <name>DFS Replication Events Error on {HOST.NAME}</name>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>3bc63708ad4340b08d7d50f3d7af7129</uuid>
+                    <name>Directory Service Events</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>eventlog[Directory Service,,&quot;Warning|Error&quot;]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <value_type>LOG</value_type>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Events</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>79e002ed7b0c4bff92ca5461083c0ba0</uuid>
+                            <expression>logseverity(/AD DS Health and Performance/eventlog[Directory Service,,&quot;Warning|Error&quot;])&gt;1 and nodata(/AD DS Health and Performance/eventlog[Directory Service,,&quot;Warning|Error&quot;],1800s)=0</expression>
+                            <name>Directory Service Events Error on {HOST.NAME}</name>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>318dcb7c692947e08f126e056f77827f</uuid>
+                    <name>DNS Server Events</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>eventlog[DNS Server,,&quot;Warning|Error&quot;]</key>
+                    <delay>5m</delay>
+                    <history>1w</history>
+                    <trends>0</trends>
+                    <value_type>LOG</value_type>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Events</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>a600b41075964c11a5ddccd0989e3192</uuid>
+                            <expression>logseverity(/AD DS Health and Performance/eventlog[DNS Server,,&quot;Warning|Error&quot;])&gt;1 and nodata(/AD DS Health and Performance/eventlog[DNS Server,,&quot;Warning|Error&quot;],1800s)=0</expression>
+                            <name>DNS Server Events Error on {HOST.NAME}</name>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>91dc10e30b9244cc8584124a159d303c</uuid>
+                    <name>LDAP Port is running</name>
+                    <type>SIMPLE</type>
+                    <key>net.tcp.service[ldap]</key>
+                    <history>1w</history>
+                    <valuemap>
+                        <name>Service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Network ports</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>261faef601b54be4acc42985f5f3d88f</uuid>
+                            <expression>max(/AD DS Health and Performance/net.tcp.service[ldap],#3)=0</expression>
+                            <name>LDAP service is down on {HOST.NAME}</name>
+                            <status>DISABLED</status>
+                            <priority>HIGH</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>7c33e63e882a48148348477a866a7545</uuid>
+                    <name>I/O Database Reads Average Latency</name>
+                    <key>perf_counter[\3054(lsass/NTDSA)\2664]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>ms</units>
+                    <description>perf_counter[\Database ==&gt; Instances(lsass/NTDSA)\I/O Database Reads Average Latency]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>4ba50e9ab3c548ed9f7670aaf2d9fc64</uuid>
+                            <expression>min(/AD DS Health and Performance/perf_counter[\3054(lsass/NTDSA)\2664],#3)&gt;15</expression>
+                            <name>I/O Database Reads Average Latency &gt; 15ms on {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>3db6e037983940d9be2c778c5d4bfade</uuid>
+                    <name>I/O Database Reads/sec</name>
+                    <key>perf_counter[\3054(lsass/NTDSA)\3632]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <description>perf_counter[\Database ==&gt; Instances(lsass/NTDSA)\I/O Database Reads/sec]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>71807bb6e6d0416fbaa68fb74833be03</uuid>
+                            <expression>min(/AD DS Health and Performance/perf_counter[\3054(lsass/NTDSA)\3632],#3)&gt;10</expression>
+                            <name>I/O Database Reads/sec &gt; 10 on {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>a0714f8bb24a482481d5c84f77962b80</uuid>
+                    <name>I/O Log Writes/sec</name>
+                    <key>perf_counter[\3054(lsass/NTDSA)\3712]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <description>perf_counter[\Database ==&gt; Instances(lsass/NTDSA)\I/O Log Writes/sec]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>e95e676378d24f9cb5cfe58da9e24218</uuid>
+                    <name>I/O Log Writes Average Latency</name>
+                    <key>perf_counter[\3054(lsass/NTDSA)\3714]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>ms</units>
+                    <description>perf_counter[\Database ==&gt; Instances(lsass/NTDSA)\I/O Log Writes Average Latency]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>611b5fa4963348ac8e79dae0bce0233f</uuid>
+                            <expression>min(/AD DS Health and Performance/perf_counter[\3054(lsass/NTDSA)\3714],#3)&gt;10</expression>
+                            <name>I/O Log Writes Average Latency &gt; 10ms on {HOST.NAME}</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>edd8fbbf1dd449d495c03a6c895cbdb9</uuid>
+                    <name>DRA Inbound Object Updates Remaining in Packet</name>
+                    <key>perf_counter[\6956\17268]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <description>perf_counter[\NTDA\DRA Inbound Object Updates Remaining in Packet]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fb193d229d3b4757b289c8ad40f09b1a</uuid>
+                    <name>LDAP Writes/sec</name>
+                    <key>perf_counter[\6956\17278]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>e3063ed6bcb242d6ba43b4f3ca117ced</uuid>
+                    <name>DRA Inbound Bytes Total/sec</name>
+                    <key>perf_counter[\6956\17444]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <description>perf_counter[\NTDA\DRA Inbound Bytes Total/sec]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>c372fa1cf8404fff9ffcdf1c86497171</uuid>
+                    <name>DRA Outbound Bytes Total/sec</name>
+                    <key>perf_counter[\6956\17452]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <description>perf_counter[\NTDA\DRA Outbound Bytes Total/sec]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>ec722579ddf44498ae228a54231f0c5f</uuid>
+                    <name>DRA Pending Replication Synchronizations</name>
+                    <key>perf_counter[\NTDA\DRA Pending Replication Synchronizations]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <description>perf_counter[\NTDA\DRA Pending Replication Synchronizations]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fe58cbd89ba94e34a70e09603bfda810</uuid>
+                    <name>LDAP Active Threads</name>
+                    <key>perf_counter[\NTDS\LDAP Active Threads]</key>
+                    <history>1w</history>
+                    <status>DISABLED</status>
+                    <value_type>FLOAT</value_type>
+                    <description>perf_counter[\NTDS\LDAP Active Threads]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>fd3c312d6c944f4c8455a258dbb0ecd5</uuid>
+                    <name>LDAP Client Sessions</name>
+                    <key>perf_counter[\NTDS\LDAP Client Sessions]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <description>perf_counter[\NTDS\LDAP Client Sessions]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>0a0508bd91f146669482a2bdc45749a7</uuid>
+                    <name>LDAP Searches/sec</name>
+                    <key>perf_counter[\NTDS\LDAP Searches/sec]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <description>perf_counter[\NTDS\LDAP Searches/sec]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>74f30bad16e44877a869105e6f8bcc52</uuid>
+                    <name>LSASS Processor Time</name>
+                    <key>perf_counter[\Process(lsass)\% Processor Time]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>%</units>
+                    <description>Metric Process % Processor Time of LSASS
+perf_counter[\Process(lsass)\% Processor Time]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>398955ae5e6745ba84b275862bca1031</uuid>
+                    <name>Kerberos Authentications</name>
+                    <key>perf_counter[\Security system-wide statistics\Kerberos Authentications]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <description>perf_counter[\Security system-wide statistics\Kerberos Authentications]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>23535be77abd4eb5a262f9953978cf80</uuid>
+                    <name>NTLM Authentications</name>
+                    <key>perf_counter[\Security system-wide statistics\NTLM Authentications]</key>
+                    <history>1w</history>
+                    <value_type>FLOAT</value_type>
+                    <units>/s</units>
+                    <description>perf_counter[\Security system-wide statistics\NTLM Authentications]</description>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Performance</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>f3ecb9e253c6461ea76380065038691a</uuid>
+                    <name>State of service &quot;DFSR&quot; (DFS Replication)</name>
+                    <key>service.info[DFSR,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d24b0eacadee48d489d32a01f17dd08f</uuid>
+                    <name>State of service &quot;DNS&quot; (DNS Server)</name>
+                    <key>service.info[DNS,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>4e64610f63084ea4848725a0dbad3e1c</uuid>
+                    <name>State of service &quot;Dnscache&quot; (DNS Client)</name>
+                    <key>service.info[Dnscache,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>3b2c1878d0d0457cacd23e66bb03372f</uuid>
+                    <name>State of service &quot;IsmServ&quot; (Intersite Messaging)</name>
+                    <key>service.info[IsmServ,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>471d8f66c77440c688130a9bdda37237</uuid>
+                    <name>State of service &quot;Kdc&quot; (Kerberos Key Distribution Center)</name>
+                    <key>service.info[Kdc,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>abe4419278df46919650a2c7fb2529dc</uuid>
+                    <name>State of service &quot;LanmanServer&quot; (Server)</name>
+                    <key>service.info[LanmanServer,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>d7703e9177ed4bb3b39a26ffd4a05d01</uuid>
+                    <name>State of service &quot;LanmanWorkstation&quot; (Workstation)</name>
+                    <key>service.info[LanmanWorkstation,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>b4211d9f04584ecd82347bd0d6b2f8a2</uuid>
+                    <name>State of service &quot;Netlogon&quot; (Netlogon)</name>
+                    <key>service.info[Netlogon,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>8117eba15a204854b3ac605add3ee3ec</uuid>
+                    <name>State of service &quot;RpcSs&quot; (Remote Procedure Call (RPC))</name>
+                    <key>service.info[RpcSs,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>05f4a569578c407cb0b23e52eba2f866</uuid>
+                    <name>State of service &quot;SamSs&quot; (Security Accounts Manager)</name>
+                    <key>service.info[SamSs,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>bd16befae95d43e88908648d833e1b83</uuid>
+                    <name>State of service &quot;W32Time&quot; (Windows Time)</name>
+                    <key>service.info[W32Time,state]</key>
+                    <history>1d</history>
+                    <valuemap>
+                        <name>Windows service state</name>
+                    </valuemap>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Services</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>ba3ea33ddbe0483aa1dd88c68b1e517b</uuid>
+                    <name>Database Size</name>
+                    <key>vfs.file.size[&quot;{$ADDBPATH}&quot;]</key>
+                    <delay>1h</delay>
+                    <history>1w</history>
+                    <status>DISABLED</status>
+                    <units>Bytes</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Storage</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>dc3cc0c66aa145c1bceab822e32c6556</uuid>
+                    <name>Log File Size</name>
+                    <key>vfs.file.size[&quot;{$ADLOGPATH}&quot;]</key>
+                    <delay>1h</delay>
+                    <history>1w</history>
+                    <status>DISABLED</status>
+                    <units>Bytes</units>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>AD DS Storage</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$ADDB_PATH}</macro>
+                    <value>c:\windows\ntds\ntds.dit</value>
+                </macro>
+                <macro>
+                    <macro>{$ADLOG_PATH}</macro>
+                    <value>c:\windows\ntds\edb.log</value>
+                </macro>
+            </macros>
+            <dashboards>
+                <dashboard>
+                    <uuid>4a4228994faa45e986d06e13aa970d5d</uuid>
+                    <name>AD DS Health and Performance</name>
+                    <pages>
+                        <page>
+                            <widgets>
+                                <widget>
+                                    <type>GRAPH_CLASSIC</type>
+                                    <width>12</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>AD DS Health and Performance</host>
+                                                <name>AD DS DB and Log Size</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>GRAPH_CLASSIC</type>
+                                    <x>12</x>
+                                    <width>12</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>AD DS Health and Performance</host>
+                                                <name>LSASS Processor Time</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>GRAPH_CLASSIC</type>
+                                    <y>5</y>
+                                    <width>12</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>AD DS Health and Performance</host>
+                                                <name>AD DS Authentications</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>GRAPH_CLASSIC</type>
+                                    <x>12</x>
+                                    <y>5</y>
+                                    <width>12</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>AD DS Health and Performance</host>
+                                                <name>LDAP Statistics</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>GRAPH_CLASSIC</type>
+                                    <y>10</y>
+                                    <width>12</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>AD DS Health and Performance</host>
+                                                <name>Database ==&gt; Instances Statistics</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                                <widget>
+                                    <type>GRAPH_CLASSIC</type>
+                                    <x>12</x>
+                                    <y>10</y>
+                                    <width>12</width>
+                                    <height>5</height>
+                                    <fields>
+                                        <field>
+                                            <type>INTEGER</type>
+                                            <name>source_type</name>
+                                            <value>0</value>
+                                        </field>
+                                        <field>
+                                            <type>GRAPH</type>
+                                            <name>graphid</name>
+                                            <value>
+                                                <host>AD DS Health and Performance</host>
+                                                <name>DRA Statistics</name>
+                                            </value>
+                                        </field>
+                                    </fields>
+                                </widget>
+                            </widgets>
+                        </page>
+                    </pages>
+                </dashboard>
+            </dashboards>
+            <valuemaps>
+                <valuemap>
+                    <uuid>7d7a9ff770b0415781bbc49c400a60ed</uuid>
+                    <name>Service state</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Down</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Up</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+                <valuemap>
+                    <uuid>533232df55a847d4861fd1dd95d73baa</uuid>
+                    <name>Windows service state</name>
+                    <mappings>
+                        <mapping>
+                            <value>0</value>
+                            <newvalue>Running</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>1</value>
+                            <newvalue>Paused</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>2</value>
+                            <newvalue>Start pending</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>3</value>
+                            <newvalue>Pause pending</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>4</value>
+                            <newvalue>Continue pending</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>5</value>
+                            <newvalue>Stop pending</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>6</value>
+                            <newvalue>Stopped</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>7</value>
+                            <newvalue>Unknown</newvalue>
+                        </mapping>
+                        <mapping>
+                            <value>255</value>
+                            <newvalue>No such service</newvalue>
+                        </mapping>
+                    </mappings>
+                </valuemap>
+            </valuemaps>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <uuid>e0e4a9ff9ece4fa6b353ea55412f6763</uuid>
+            <name>AD DS Authentications</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\Security system-wide statistics\Kerberos Authentications]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\Security system-wide statistics\NTLM Authentications]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>bc99aef7310540cfa51279096b10d1ec</uuid>
+            <name>AD DS DB and Log Size</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>vfs.file.size[&quot;{$ADDBPATH}&quot;]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>vfs.file.size[&quot;{$ADLOGPATH}&quot;]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>d2bf271b0e4d4a33af6ffb19f8e289f2</uuid>
+            <name>Database ==&gt; Instances Statistics</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\3054(lsass/NTDSA)\3632]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\3054(lsass/NTDSA)\2664]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\3054(lsass/NTDSA)\3712]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>A54F10</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\3054(lsass/NTDSA)\3714]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>8abeb5f241e14635a3ba13d12fed6b07</uuid>
+            <name>DRA Statistics</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\6956\17268]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\NTDA\DRA Pending Replication Synchronizations]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\6956\17444]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>3</sortorder>
+                    <color>A54F10</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\6956\17452]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>2833f9419ee542f794a3d78a22761661</uuid>
+            <name>LDAP Statistics</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <graph_items>
+                <graph_item>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\NTDS\LDAP Client Sessions]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <color>F63100</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\NTDS\LDAP Searches/sec]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>2</sortorder>
+                    <color>2774A4</color>
+                    <yaxisside>RIGHT</yaxisside>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\6956\17278]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <uuid>884320ad4d09490bafa58242da0fdc9a</uuid>
+            <name>LSASS Processor Time</name>
+            <show_work_period>NO</show_work_period>
+            <show_triggers>NO</show_triggers>
+            <show_legend>NO</show_legend>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>FILLED_REGION</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>AD DS Health and Performance</host>
+                        <key>perf_counter[\Process(lsass)\% Processor Time]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
