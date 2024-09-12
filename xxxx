@@ -1,0 +1,1 @@
+msiexec.exe /i "zabbix_agent-windows-amd64-openssl.msi" ALLUSERS=1 /qn /norestart /log output.log HOSTNAME=%ComputerName%.AD.Domain SERVER=10.0.221.114 SERVERACTIVE=10.0.221.114 HOSTMETADATA="WindowsServers"
